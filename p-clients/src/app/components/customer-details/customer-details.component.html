@@ -1,0 +1,75 @@
+<br>
+<mat-card>Customer Details:
+
+<mat-list style="background-color:rgb(66, 66, 66);">
+    <mat-list-item> Name: {{customer?.firstName}} {{customer?.lastName}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>ID: {{customer?.id}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Address: 
+      <div>
+        <mat-form-field class="example-full-width" *ngIf="isEditEnable">
+            <input matInput placeholder="Enter house number" [(ngModel)]="address.houseNumber">
+      </mat-form-field>&nbsp;
+      <mat-form-field class="example-full-width" *ngIf="isEditEnable">
+        <input matInput placeholder="Enter street" [(ngModel)]="address.street">
+  </mat-form-field>&nbsp;
+  <mat-form-field class="example-full-width" *ngIf="isEditEnable">
+    <input matInput placeholder="Enter city" [(ngModel)]="address.city">
+</mat-form-field>&nbsp;
+<mat-form-field class="example-full-width" *ngIf="isEditEnable">
+  <input matInput placeholder="Enter postal Code" [(ngModel)]="address.postalCode">
+</mat-form-field>&nbsp;
+      <span *ngIf="!isEditEnable">{{address.houseNumber}}&nbsp;{{address.street}},&nbsp;{{address.city}}&nbsp;&nbsp;{{address.postalCode}}&nbsp;&nbsp;</span>
+    </div>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" *ngIf="!isEditEnable" (click)="onEdit()"><mat-icon>edit</mat-icon>Edit</button>
+      <button *ngIf="isEditEnable" mat-raised-button color="primary" (click)="onEdit()">Submit</button> 
+    </div>
+</mat-list-item>
+
+  <mat-divider></mat-divider>
+</mat-list>
+</mat-card>
+<br>
+<mat-card>
+    Contracts:
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let contract of customer?.contracts">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                No.: {{contract.number}},&nbsp;&nbsp;&nbsp;name: {{contract.name}},&nbsp;&nbsp;&nbsp;type: {{GetContractTypeKey(contract.type)}}
+            </mat-panel-title>
+            <mat-panel-description>
+             
+              
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          packages:
+          <table mat-table *ngIf="contract.packages != undefined" [dataSource]="contract.packages!" class="mat-elevation-z8">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef> Quantity </th>
+              <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+            </ng-container>
+            <ng-container matColumnDef="utilization">
+                <th mat-header-cell *matHeaderCellDef> Utilization </th>
+                <td mat-cell *matCellDef="let element"> {{element.utilization}} </td>
+              </ng-container>
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef> type </th>
+              <td mat-cell *matCellDef="let element"> {{GetPackageTypeKey(element.type)}}  {{element.type.key}} {{element.type.value}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </mat-expansion-panel>
+      </mat-accordion>
+      
+    </mat-card>
+    <br>
+    <button mat-raised-button color="primary"  (click)="changeCustomer()"><mat-icon>settings_backup_restore</mat-icon>Switch Customer</button>

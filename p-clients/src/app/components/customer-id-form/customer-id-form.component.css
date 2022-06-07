@@ -1,0 +1,10 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  form {
+    width: 100%;
+    background-color: rgb(66, 66, 66);
+    color:white;
+  }

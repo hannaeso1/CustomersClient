@@ -1,0 +1,10 @@
+<br>
+<form class="example-form" [formGroup]="customerIDForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Type an ID:</mat-label>
+        <input matInput formControlName="customerID">
+      </mat-form-field>&nbsp;
+      <button mat-button type="submit" [disabled]="!customerIDForm.valid">Submit</button>
+<form>
+
+

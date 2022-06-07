@@ -1,0 +1,17 @@
+<!--app-customer-id-form></app-customer-id-form-->
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+  <span>
+    {{title}}
+  </span>
+  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+    <button mat-button routerLink="/login">
+      <mat-icon>account_circle</mat-icon>
+      Login
+    </button>
+    <button mat-button routerLink="/customer-details" >
+      <mat-icon>assignment_ind</mat-icon>
+      Customer Details
+    </button>
+  </div>
+</mat-toolbar>
+<router-outlet></router-outlet>
